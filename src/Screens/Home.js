@@ -2,29 +2,28 @@ import React, { useState, useEffect } from "react";
 import "../App.css";
 import logo from "../assets/cse.png";
 import { Link } from "react-router-dom";
-function Home({ namesP, setNamesP }) {
+function Home({ names, setNames }) {
   const [file, setfile] = useState(null);
   const [winner, setWinner] = useState("");
 
   const handleFile = (e) => {
     setfile(e.target.files[0]);
-    console.log(e.target.files[0]);
     const fr = new FileReader();
     fr.onload = () => {
       const newNames = fr.result.split("\n");
-      setNamesP(newNames);
+      setNames(newNames);
     };
     fr.readAsText(e.target.files[0]);
   };
   const handleWinner = () => {
-    if (namesP.length > 0) {
-      const r = Math.floor(Math.random() * namesP.length);
-      setWinner(namesP[r]);
+    if (names.length > 0) {
+      const r = Math.floor(Math.random() * names.length);
+      setWinner(names[r]);
     }
   };
   useEffect(() => {
     handleWinner();
-  }, [namesP]);
+  }, [names]);
 
   return (
     <div className="relative App w-full h-screen flex flex-col justify-start items-center py-10">
@@ -37,9 +36,9 @@ function Home({ namesP, setNamesP }) {
           className="custom-file-input pl-16 rounded-lg blueBg shadow-2xl"
         />
       </div>
-      {namesP.length > 0 && (
+      {names.length > 0 && (
         <div className="scroll flex flex-col justify-center items-center mt-6 w-full h-2/3 overflow-y-scroll">
-          {namesP.map((n, idx) => (
+          {names.map((n, idx) => (
             <div
               key={idx}
               className="w-14 text-lg text-white text-center py-2 shadow-2xl"
@@ -59,12 +58,12 @@ function Home({ namesP, setNamesP }) {
           ))}
         </div>
       )}
-      {!(namesP.length > 0) && (
+      {!(names.length > 0) && (
         <div className=" text-white py-6 text-2x">
           Please upload a .txt file with all names
         </div>
       )}
-      {namesP.length > 0 && (
+      {names.length > 0 && (
         <Link
           to={{
             pathname: "/winner",

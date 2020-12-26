@@ -10,7 +10,7 @@ function App() {
     <Router>
       <Switch>
         <Route exact path="/">
-          <Home namesP={names} setNamesP={setNames} />
+          <Home names={names} setNames={setNames} />
         </Route>
         <Route exact path="/winner">
           <Winner />
