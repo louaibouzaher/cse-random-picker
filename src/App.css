@@ -1,38 +1,44 @@
 .App {
-  text-align: center;
+  background-color: #060f1c;
+}
+.blueBg {
+  background-color: #06a6ff;
+}
+.yellowBg {
+  background-color: #fcf300;
+  color: #060f1c;
+}
+html::-webkit-scrollbar {
+  display: none !important;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.scroll::-webkit-scrollbar {
+  width: 15px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px rgb(53, 53, 53, 0.2);
+  border-radius: 10px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+::-webkit-scrollbar-thumb {
+  background-color: #06a6ff;
+  border-radius: 10px;
+}
+
+.custom-file-input::-webkit-file-upload-button {
+  visibility: hidden;
+}
+.custom-file-input::before {
+  content: "Add File";
+  background: rgba(0, 0, 0, 0);
   color: white;
+  outline: none;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 12pt;
 }
 
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.custom-file-input:active::before {
+  background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
 }
