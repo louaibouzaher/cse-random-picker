@@ -3,14 +3,13 @@ import "../App.css";
 import logo from "../assets/cse.png";
 import { Link } from "react-router-dom";
 function Home({ names, setNames }) {
-  const [file, setfile] = useState(null);
   const [winner, setWinner] = useState("");
 
   const handleFile = (e) => {
-    setfile(e.target.files[0]);
     const fr = new FileReader();
     fr.onload = () => {
-      const newNames = fr.result.split("\n");
+      const newNames = fr.result.split("\n").filter((m) => m.length > 1);
+      console.log(newNames);
       setNames(newNames);
     };
     fr.readAsText(e.target.files[0]);
@@ -18,7 +17,10 @@ function Home({ names, setNames }) {
   const handleWinner = () => {
     if (names.length > 0) {
       const r = Math.floor(Math.random() * names.length);
-      setWinner(names[r]);
+      if (names[r]) {
+        setWinner(names[r]);
+        delete names[r];
+      }
     }
   };
   useEffect(() => {

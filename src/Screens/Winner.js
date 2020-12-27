@@ -6,7 +6,7 @@ const Winner = () => {
   const [isTime, setisTime] = useState(false);
   setTimeout(() => {
     setisTime(true);
-  }, 5000);
+  }, 4000);
   return (
     <div className="relative App w-full h-screen flex flex-col justify-center items-center py-10">
       {!isTime && (
