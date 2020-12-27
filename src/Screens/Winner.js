@@ -1,12 +1,26 @@
 import React, { useState } from "react";
 import { BeatLoader } from "react-spinners";
-import { Link, useLocation } from "react-router-dom";
-const Winner = () => {
-  const l = useLocation();
+import { Link } from "react-router-dom";
+const Winner = ({ names, setNames }) => {
+  const handleWinner = () => {
+    if (names.length > 0) {
+      const r = Math.floor(Math.random() * names.length);
+      const w = names[r];
+      if (w) {
+        setNames(names.filter((m) => m !== w));
+        return w;
+      } else {
+        handleWinner();
+      }
+    }
+  };
+  const [winner, setWinner] = useState(handleWinner);
   const [isTime, setisTime] = useState(false);
+
   setTimeout(() => {
     setisTime(true);
   }, 4000);
+
   return (
     <div className="relative App w-full h-screen flex flex-col justify-center items-center py-10">
       {!isTime && (
@@ -21,7 +35,7 @@ const Winner = () => {
         <div className="flex flex-col justify-center items-center">
           <div className="text-4xl text-white font-bold text-center">
             Congratulations 🥳!! <br />
-            <span style={{ color: "#06a6ff" }}>{l.state}</span>
+            <span style={{ color: "#06a6ff" }}>{winner} </span>
           </div>
           <Link
             to="/"

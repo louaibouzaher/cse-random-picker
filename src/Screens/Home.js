@@ -1,31 +1,16 @@
-import React, { useState, useEffect } from "react";
 import "../App.css";
 import logo from "../assets/cse.png";
 import { Link } from "react-router-dom";
-function Home({ names, setNames }) {
-  const [winner, setWinner] = useState("");
-
+const Home = ({ names, setNames }) => {
   const handleFile = (e) => {
     const fr = new FileReader();
     fr.onload = () => {
-      const newNames = fr.result.split("\n").filter((m) => m.length > 1);
+      const newNames = fr.result.split("\n").filter((m) => m.length > 2);
       console.log(newNames);
       setNames(newNames);
     };
     fr.readAsText(e.target.files[0]);
   };
-  const handleWinner = () => {
-    if (names.length > 0) {
-      const r = Math.floor(Math.random() * names.length);
-      if (names[r]) {
-        setWinner(names[r]);
-        delete names[r];
-      }
-    }
-  };
-  useEffect(() => {
-    handleWinner();
-  }, [names]);
 
   return (
     <div className="relative App w-full h-screen flex flex-col justify-start items-center py-10">
@@ -67,10 +52,7 @@ function Home({ names, setNames }) {
       )}
       {names.length > 0 && (
         <Link
-          to={{
-            pathname: "/winner",
-            state: winner,
-          }}
+          to="/winner"
           className="cursor-pointer absolute text-white blueBg py-2 px-5 text-2xl rounded-3xl bottom-10 shadow-2xl"
         >
           Pick a Winner 🎉
@@ -81,6 +63,6 @@ function Home({ names, setNames }) {
       </footer>
     </div>
   );
-}
+};
 
 export default Home;

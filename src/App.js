@@ -13,7 +13,7 @@ function App() {
           <Home names={names} setNames={setNames} />
         </Route>
         <Route exact path="/winner">
-          <Winner />
+          <Winner names={names} setNames={setNames} />
         </Route>
       </Switch>
     </Router>
